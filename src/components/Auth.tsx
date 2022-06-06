@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
+import { login, updateUserProfile } from "../features/userSlice";
 
 import {
   Avatar,
@@ -19,8 +21,8 @@ import { SignInData } from "../interfaces";
 import { signIn, signUp } from "../lib/api/auth";
 
 const Auth: React.FC = () => {
+  const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState<boolean>(false);
-
   const [display_name, setDisplayName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -38,6 +40,12 @@ const Auth: React.FC = () => {
       const res = await signUp(data);
       if (res.status === 201) {
         console.log("sign up");
+        dispatch(
+          login({
+            id: res.data.id,
+            display_name: res.data.display_name,
+          })
+        );
       } else {
         alert(res.data);
       }
@@ -55,6 +63,12 @@ const Auth: React.FC = () => {
       const res = await signIn(data);
       if (res.status === 201) {
         console.log("sign in");
+        dispatch(
+          login({
+            id: res.data.id,
+            display_name: res.data.display_name,
+          })
+        );
       } else {
         alert(res.data);
       }

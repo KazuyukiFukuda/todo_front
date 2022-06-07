@@ -10,26 +10,34 @@ export interface SignInData {
   password: string;
 }
 
-export interface User {
+export interface UserData {
   id: number;
   email: string;
   display_name: string;
 }
 
-export interface Task {
-  task_id: number;
+export interface TaskData {
+  task_id: string;
   name: string;
-  deadline: Date;
+  deadline: string;
   create_user: string;
   assignee_user?: string;
   public: boolean;
   completed: boolean;
-  total_subtask_amount: number;
-  finished_subtask_amount: number;
-  subtasks: SubTask[];
+  total_subtask_amount: string;
+  finished_subtask_amount: string;
 }
 
-export interface SubTask {
+export interface TaskWithSubtask {
+  name: string;
+  description: string;
+  deadline: Date;
+  assignee_id: number;
+  public: boolean;
+  subtask: Array<Subtask>;
+}
+
+export interface Subtask {
   id: number;
   subtask_description: string;
   subtask_completed: boolean;

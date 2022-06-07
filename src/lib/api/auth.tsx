@@ -8,17 +8,10 @@ export const signUp = (data: SignUpData) => {
 
 //sign in
 export const signIn = (data: SignInData) => {
-  return client.post("auth", data);
+  return client.post("auth.json", data);
 };
 
 //sign out
-export const signOut = (session_id: any) => {
-  return (
-    client.delete("auth"),
-    {
-      headers: {
-        _session_id: session_id,
-      },
-    }
-  );
+export const signOut = () => {
+  return client.delete("auth");
 };

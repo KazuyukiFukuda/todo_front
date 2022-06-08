@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
 
 interface USER {
-  id: number;
+  id: string;
   display_name: string;
   email: string;
 }

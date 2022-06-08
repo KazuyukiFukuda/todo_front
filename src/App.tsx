@@ -14,10 +14,9 @@ import { me } from "./lib/api/users";
 const App: React.FC = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
-  console.log(user);
   useEffect(() => {
     if (user.id === "") {
-      console.log("user id is in");
+      console.log("user id is nothing");
       me().then((res) => {
         dispatch(
           login({

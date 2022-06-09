@@ -1,21 +1,17 @@
 import React, { useContext } from "react";
-import { selectUser, login, logout } from "../features/userSlice";
+import { selectUser, logout } from "../features/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { signOut } from "../lib/api/auth";
-import { pageStatusContext, setPageStateContext, PageStatus } from "./Feed";
+import { setPageStateContext, PageStatus } from "./Feed";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Item from "@mui/material";
-import { Grid, MenuItem } from "@material-ui/core";
 
-const usePageState = () => useContext(pageStatusContext);
+import Button from "@mui/material/Button";
+
+import { Grid } from "@material-ui/core";
+
 const useSetPageState = () => useContext(setPageStateContext);
 
 const Header: React.FC = () => {

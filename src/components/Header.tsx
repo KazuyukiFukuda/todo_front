@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { selectUser, login, logout } from "../features/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { signOut } from "../lib/api/auth";
+import { pageStatusContext, setPageStateContext, PageStatus } from "./Feed";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,9 +15,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Item from "@mui/material";
 import { Grid, MenuItem } from "@material-ui/core";
 
+const usePageState = () => useContext(pageStatusContext);
+const useSetPageState = () => useContext(setPageStateContext);
+
 const Header: React.FC = () => {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+
+  const setPageState = useSetPageState();
 
   const deleteSignOut = async () => {
     console.log("sign out するよ");
@@ -43,12 +49,24 @@ const Header: React.FC = () => {
         <Toolbar>
           <Grid container spacing={2}>
             <Grid item xs={8}>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  setPageState(PageStatus.FEED);
+                }}
+              >
                 {user.display_name}
-              </Typography>
+              </Button>
             </Grid>
             <Grid item xs={4}>
-              <Button color="inherit">プロフィール</Button>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  setPageState(PageStatus.EDITINGTASK);
+                }}
+              >
+                プロフィール
+              </Button>
               <Button
                 color="inherit"
                 onClick={() => {

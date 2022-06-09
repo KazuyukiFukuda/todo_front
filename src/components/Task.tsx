@@ -1,49 +1,117 @@
-import { CardActionArea, Typography } from "@material-ui/core";
+import { CardActionArea, Grid, Typography } from "@material-ui/core";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
+import Checkbox from "@mui/material/Checkbox";
 import CardContent from "@mui/material/CardContent";
-import React from "react";
+import FormControlLabel from "@mui/material/FormControlLabel";
+
+import React, { useState } from "react";
 import { TaskData } from "../interfaces";
+import { deleteTask } from "../lib/api/tasks";
 
 const Task: React.FC<TaskData> = (props) => {
+  const [taskStatus, setTaskStatus] = useState<boolean>(props.completed);
+
+  const deleteButtonHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    deleteTask(props.task_id);
+  };
+
   return (
-    <Card sx={{ display: "flex" }}>
-      <CardActionArea>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <CardContent sx={{ flex: "1 0 auto" }}>
-            <Typography>{props.name}</Typography>
-            <Typography>
-              作成者；{props.create_user}　担当者；
-              {props.assignee_user === "" ? props.assignee_user : "なし"}
-            </Typography>
-            <div>
-              <Button
-                color="primary"
-                variant="contained"
-                size="small"
-                onClick={() => {
-                  console.log("edit");
-                }}
-              >
-                編集
-              </Button>
-              <Button color="error" variant="contained" size="small">
-                削除
-              </Button>
-            </div>
-          </CardContent>
-        </Box>
-        <Box>
-          <CardContent>
-            <Typography>{props.completed ? "完了" : "未完了"}</Typography>
-            <Typography>
-              {props.finished_subtask_amount}/{props.finished_subtask_amount}
-            </Typography>
-          </CardContent>
-        </Box>
-      </CardActionArea>
-    </Card>
+    <div>
+      <Card sx={{ margin: "0px 40px 40px 40px" }} elevation={10}>
+        <CardActionArea>
+          <Grid container justifyContent="space-between" alignItems="center">
+            <Grid item xs={7}>
+              <CardContent sx={{ flex: "1 0 auto" }}>
+                <Grid
+                  container
+                  spacing={2}
+                  direction="column"
+                  justifyContent="space-between"
+                  alignItems="flex-start"
+                >
+                  <Grid item>
+                    <Typography variant="h4">{props.name}</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography>
+                      作成者；{props.create_user}　担当者；
+                      {props.assignee_user === ""
+                        ? props.assignee_user
+                        : "なし"}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs container spacing={3}>
+                    <Grid item>
+                      <Button
+                        color="primary"
+                        variant="contained"
+                        size="small"
+                        onClick={() => {
+                          console.log("edit");
+                        }}
+                      >
+                        編集
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        color="error"
+                        variant="contained"
+                        size="small"
+                        onClick={deleteButtonHandler}
+                      >
+                        削除
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Grid>
+            <Grid item xs={3}>
+              <CardContent sx={{ flex: "1 0 auto" }}>
+                <Grid
+                  container
+                  spacing={2}
+                  direction="column"
+                  justifyContent="space-between"
+                  alignItems="flex-start"
+                >
+                  <Grid item>
+                    <Typography variant="h6">
+                      {props.completed ? "完了" : "未完了"}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography>
+                      {props.finished_subtask_amount}/
+                      {props.finished_subtask_amount}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={taskStatus}
+                          onChange={() => {
+                            setTaskStatus(!taskStatus);
+                          }}
+                        />
+                      }
+                      label={taskStatus ? "完了しました" : "未完了です"}
+                    />
+                  </Grid>
+                  <Grid item>
+                    <Typography>期日；{props.deadline}</Typography>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Grid>
+          </Grid>
+        </CardActionArea>
+      </Card>
+    </div>
   );
 };
 

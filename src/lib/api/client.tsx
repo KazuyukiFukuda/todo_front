@@ -1,9 +1,7 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
-const DEFAULT_API_CONFIG = {
+const DEFAULT_API_CONFIG: AxiosRequestConfig = {
   baseURL: "http://localhost:3000",
-  mode: "cors",
-  credentials: "include",
   withCredentials: true,
   headers: {
     ContentType: "application/json",

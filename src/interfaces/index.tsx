@@ -34,10 +34,10 @@ export interface TaskWithSubtask {
   deadline: Date;
   assignee_id: number;
   public: boolean;
-  subtask: Array<Subtask>;
+  subtask: Array<SubtaskData>;
 }
 
-export interface Subtask {
+export interface SubtaskData {
   id: number;
   subtask_description: string;
   subtask_completed: boolean;

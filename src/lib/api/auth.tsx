@@ -8,7 +8,7 @@ export const signUp = (data: SignUpData) => {
 
 //sign in
 export const signIn = (data: SignInData) => {
-  return client.post("auth.json", data);
+  return client.post("auth", data);
 };
 
 //sign out

@@ -39,6 +39,6 @@ export interface TaskWithSubtask {
 
 export interface SubtaskData {
   id: number;
-  subtask_description: string;
-  subtask_completed: boolean;
+  description: string;
+  completed: boolean;
 }

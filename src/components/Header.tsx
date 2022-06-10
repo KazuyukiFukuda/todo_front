@@ -28,12 +28,10 @@ const Header: React.FC = () => {
           dispatch(logout());
           console.log("200だよ");
         } else {
-          alert(res.status);
           console.log("204以外を受け取った");
         }
       })
       .catch((res) => {
-        alert(res.data.message);
         console.log("なんかエラー吐いたよ");
       });
     console.log("sign out したよ");
@@ -58,7 +56,7 @@ const Header: React.FC = () => {
               <Button
                 color="inherit"
                 onClick={() => {
-                  setPageState(PageStatus.EDITINGTASK);
+                  setPageState(PageStatus.EDITPROFILE);
                 }}
               >
                 プロフィール

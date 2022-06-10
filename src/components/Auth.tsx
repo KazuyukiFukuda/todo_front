@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login, updateUserProfile } from "../features/userSlice";
+import { login } from "../features/userSlice";
 import styles from "./Auth.module.css";
 
 import {
@@ -81,10 +81,11 @@ const Auth: React.FC = () => {
           })
         );
       } else {
-        alert(res.data);
+        alert("hoge");
+        console.log("hoge");
       }
     } catch (err: any) {
-      alert(err.message);
+      alert(err);
     }
   };
 
@@ -105,11 +106,8 @@ const Auth: React.FC = () => {
           })
         );
       } else {
-        alert(res.data);
       }
-    } catch (err: any) {
-      alert(err.message);
-    }
+    } catch (err: any) {}
   };
 
   return (
@@ -221,16 +219,12 @@ const Auth: React.FC = () => {
                   ? async () => {
                       try {
                         await postSignIn();
-                      } catch (err: any) {
-                        alert(err.message);
-                      }
+                      } catch (err: any) {}
                     }
                   : async () => {
                       try {
                         await postSignUp();
-                      } catch (err: any) {
-                        alert(err.message);
-                      }
+                      } catch (err: any) {}
                     }
               }
             >

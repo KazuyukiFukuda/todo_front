@@ -55,9 +55,7 @@ const CreateTask: React.FC = () => {
         .then(function (response) {
           setUserList(response.data.message);
         })
-        .catch(function (error) {
-          alert(error);
-        });
+        .catch(function (error) {});
     };
     return () => {
       unSub();
